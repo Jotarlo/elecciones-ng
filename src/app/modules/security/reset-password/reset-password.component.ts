@@ -54,4 +54,8 @@ export class ResetPasswordComponent implements OnInit {
     );
   }
 
+  get fg(){
+    return this.fGroup.controls;
+  }
+
 }

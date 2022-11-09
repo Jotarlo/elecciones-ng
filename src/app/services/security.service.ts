@@ -11,13 +11,21 @@ export class SecurityService {
   url: string = ApisInfo.SEC_MS_URL;
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  ResetPasswordRequest(username: string):Observable<boolean> {
+  ResetPasswordRequest(username: string): Observable<boolean> {
     let actionName = 'recuperar-clave';
     return this.http.post<boolean>(`${this.url}/${actionName}`, {
       correo: username
+    });
+  }
+
+  LoginRequest(username: string, password: string): Observable<object> {
+    let actionName = 'login';
+    return this.http.post<object>(`${this.url}/${actionName}`, {
+      nombreUsuario: username,
+      clave: password
     });
   }
 
