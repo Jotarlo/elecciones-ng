@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserModel } from 'src/app/models/user.model';
+import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isLogged: boolean = false;
+  constructor(
+    private secService: SecurityService
+  ) { }
 
   ngOnInit(): void {
+    this.secService.getUserData().subscribe({
+      next: (data:UserModel)=>{
+        this.isLogged = data.isLogged;
+      },
+      error: (err) =>{
+
+      }
+    });
   }
 
 }

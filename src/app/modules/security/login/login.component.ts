@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DefaultValues } from 'src/app/config/default-values';
+import { LoggedUserModel } from 'src/app/models/logged-user.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { SecurityService } from 'src/app/services/security.service';
 
 var MD5 = require("crypto-js/md5");
@@ -13,13 +15,14 @@ var MD5 = require("crypto-js/md5");
 })
 export class LoginComponent implements OnInit {
 
-  
+
   fGroup: FormGroup = new FormGroup({});
 
   constructor(
     private fb: FormBuilder,
     private secService: SecurityService,
-    private router: Router
+    private router: Router,
+    private lsService: LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +39,7 @@ export class LoginComponent implements OnInit {
   BuildingForm() {
     this.fGroup = this.fb.group({
       username: [DefaultValues.email, [Validators.required, Validators.email, Validators.minLength(5)]],
-      password:[DefaultValues.password, [Validators.required]],
+      password: [DefaultValues.password, [Validators.required]],
     });
   }
 
@@ -49,26 +52,27 @@ export class LoginComponent implements OnInit {
     let cryptoPassword = MD5(password).toString();
     console.log(cryptoPassword);
     this.secService.LoginRequest(username, cryptoPassword).subscribe({
-      next:(data) => {
+      next: (data: LoggedUserModel) => {
         // cuando se ha obtenido una respuesta válida
-        if(data == null){
+        if (data.token == "") {
           alert("Datos inválidos");
-        }else{
+        } else {
           console.log(data);
-          alert(data);
+          data.user.isLogged = true;
+          this.lsService.SaveUserData(data);
           this.router.navigate(["/home"]);
           // localstorage
           // mostrar un menú y ocultar el item de login
         }
       },
       error: (err) => {
-          alert("Se ha presentado un fallo recuperando la contraseña.")
+        alert("Se ha presentado un fallo recuperando la contraseña.")
       }
     }
     );
   }
 
-  get fg(){
+  get fg() {
     return this.fGroup.controls;
   }
 
