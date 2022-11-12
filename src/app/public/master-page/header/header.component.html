@@ -1,17 +1,69 @@
 <nav class="green">
-    <div class="nav-wrapper">
-      <a routerLink="/home" class="brand-logo">Inicio</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a *ngIf="!isLogged" routerLink="/security/login">Login</a></li>
-        <li><a *ngIf="isLogged" routerLink="/parameters/election">Elecciones</a></li>
-        <li><a *ngIf="isLogged" routerLink="/parameters/candidate">Candidatos</a></li>
-      </ul>
-    </div>
-  </nav>
+  <div class="nav-wrapper">
+    <a routerLink="/home" class="brand-logo">Inicio</a>
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+      ><i class="material-icons">menu</i></a
+    >
+    <ul *ngIf="isLogged" class="right">
+<li> | En sesión: {{fullname}}</li>
+    </ul>
+
+    <ul class="right hide-on-med-and-down">
+      <li><a *ngIf="!isLogged" routerLink="/security/login">Login</a></li>
+      <li><a *ngIf="isLogged" routerLink="/security/logout">Logout</a></li>
+    </ul>
+    
+    <ul
+      class="right hide-on-med-and-down"
+      *ngIf="roleId == '631fce3db1c44017449ac402'"
+    >
+      <li>
+        <a *ngIf="isLogged" routerLink="/parameters/list-election"
+          >Elecciones</a
+        >
+      </li>
+      <li>
+        <a *ngIf="isLogged" routerLink="/parameters/list-parties"
+          >Movimientos</a
+        >
+      </li>
+      <li>
+        <a *ngIf="isLogged" routerLink="/parameters/list-candidates"
+          >Candidatos</a
+        >
+      </li>
+    </ul>
+    <ul
+      class="right hide-on-med-and-down"
+      *ngIf="roleId == '631fce56b1c44017449ac403'"
+    >
+      <li>
+        <a *ngIf="isLogged" routerLink="/parameters/candidate">Candidatos</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+  <ul
+    class="right hide-on-med-and-down"
+    *ngIf="roleId == '631fce3db1c44017449ac402'"
+  >
+    <li>
+      <a *ngIf="isLogged" routerLink="/parameters/list-election">Elecciones</a>
+    </li>
+  </ul>
 
   <ul class="sidenav" id="mobile-demo">
     <li><a *ngIf="!isLogged" routerLink="/security/login">Login</a></li>
-    <li><a *ngIf="isLogged" routerLink="/parameters/election">Elecciones</a></li>
-    <li><a *ngIf="isLogged" routerLink="/parameters/candidate">Candidatos</a></li>
+    <li><a *ngIf="isLogged" routerLink="/security/logout">Logout</a></li>
   </ul>
+  <ul
+    class="right hide-on-med-and-down"
+    *ngIf="roleId == '631fce56b1c44017449ac403'"
+  >
+    <li>
+      <a *ngIf="isLogged" routerLink="/parameters/candidate">Candidatos</a>
+    </li>
+  </ul>
+</ul>

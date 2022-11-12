@@ -64,5 +64,15 @@ export class SecurityService {
     });
   }
 
+  /**
+   * Valida sí el token almacenado es correcto 
+   * @param jwt token de localstorage
+   * @returns string con rol_id o vacío
+   */
+  CheckSessionToken(jwt:string):Observable<boolean>{
+    let actionName = 'check-session-token/';
+    return this.http.get<boolean>(`${this.url}/${actionName}/${jwt}`);
+  }
+
 
 }

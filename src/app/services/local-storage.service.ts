@@ -9,8 +9,10 @@ import { SecurityService } from './security.service';
 })
 export class LocalStorageService {
 
-  constructor(private secService: SecurityService) { 
-    
+  constructor(
+    private secService: SecurityService,
+  ) {
+
   }
 
   SaveUserData(data: LoggedUserModel): boolean {
@@ -24,14 +26,35 @@ export class LocalStorageService {
     }
   }
 
-  /*
-  GetUserData(): UserModel | null{
+  RemoveUserData() {
+    localStorage.removeItem("user-data");
+    let userData = new UserModel();
+    this.secService.UpdateUserBehavior(userData);
+  }
+  
+  GetSessionData(): LoggedUserModel | null{
     let userAsString = localStorage.getItem("user-data");
     if(userAsString){
-      let userData: LoggedUserModel =  JSON.parse(userAsString);
-      return userData.user;
+      return JSON.parse(userAsString);
     }
     return null;
-  }*/
+  }
+
+  GetRolId():string{
+    let userAsString = localStorage.getItem("user-data");
+    if(userAsString){
+      return JSON.parse(userAsString).user.role;
+    }
+    return "";
+  }
+
+  GetSessionToken():string{
+    let userAsString = localStorage.getItem("user-data");
+    if(userAsString){
+      return JSON.parse(userAsString).token;
+      ;
+    }
+    return "";
+  }
 
 }
