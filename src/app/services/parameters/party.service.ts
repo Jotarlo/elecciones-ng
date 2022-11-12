@@ -32,6 +32,14 @@ export class PartyService {
     return this.http.get<PartyModel[]>(this.url);
   }
 
+  getRecordById(id:number): Observable<PartyModel> {
+    return this.http.get<PartyModel>(this.url+"/"+id, {
+      headers:new HttpHeaders({
+        "Authorization":"Bearer "+ this.jwt
+      })
+    });
+  }
+
 
   /**
    * Crea un nuevo registro

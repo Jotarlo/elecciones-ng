@@ -1,33 +1,61 @@
-<br/>
-<a routerLink="/parameters/create-party" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Agregar</a>
+<br />
+<a routerLink="/parameters/create-party" class="waves-effect waves-light btn"
+  ><i class="material-icons left">add</i>Agregar</a
+>
 
 <table class="striped">
-    <thead>
-        <tr>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Logo
-            </th>
-            <th>
-                Acciones
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let r of recordList">
-            <td>
-                {{r.nombre}}
-            </td>
-            <td>
-                <img class="logoMovimiento" src="{{urlServer}}/ObtenerArchivo/2/{{r.logo}}" alt="logo" />
-            </td>
-            <td>
-                <a class="waves-effect  btn orange"><i class="material-icons left">edit</i>Editar</a>
-                &nbsp;
-                <a class="waves-effect  btn red"><i class="material-icons left">delete</i>Eliminar</a>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Logo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of recordList">
+      <td>
+        {{ r.nombre }}
+      </td>
+      <td>
+        <img
+          class="logoMovimiento"
+          src="{{ urlServer }}/ObtenerArchivo/2/{{ r.logo }}"
+          alt="logo"
+        />
+      </td>
+      <td>
+        <a
+          routerLink="/parameters/edit-party/{{ r.id }}"
+          class="waves-effect btn orange"
+          ><i class="material-icons left">edit</i>Editar</a
+        >
+        &nbsp;
+        <a
+          routerLink="/parameters/remove-party/{{ r.id }}"
+          class="waves-effect btn red"
+          ><i class="material-icons left">delete</i>Eliminar en Componente</a
+        >
+        &nbsp;
+        <button
+          type="button"
+          (click)="ShowRemoveWindow(r.id)"
+          class="waves-effect btn red"
+        >
+          <i class="material-icons left">delete</i>Eliminar en Popup
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+
+  <!-- Modal Structure -->
+  <div id="modalConfirmation" class="modal">
+    <div class="modal-content">
+      <h4>Confirmación de evento</h4>
+      <p id="pConfirmationMessage"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" (click)="RemoveRecord()">Eliminar</button>
+    </div>
+  </div>

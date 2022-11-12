@@ -1,1 +1,55 @@
-<p>edit-party works!</p>
+<div class="row">
+    <form class="col s12" [formGroup]="fGroup">
+        <input type="hidden" formControlName="id" />
+      <div class="row">
+        <div class="input-field col s12 center">
+          <img
+            *ngIf="uploadedImage == ''"
+            src="/assets/images/not_image.png"
+            class="imgInput"
+          />
+          <img
+            *ngIf="uploadedImage != ''"
+            src="{{ urlServer }}/ObtenerArchivo/2/{{ uploadedImage }}"
+            class="imgInput"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col sm-12">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input type="file" (change)="onFileSelect($event)"/>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="col sm-4">
+          <button (click)="UploadImage()" [disabled]="!isFileSelected" class="btn orange">Cargar</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input formControlName="name" id="name" type="text" />
+          <label class="active" for="last_name">Nombre</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <button class="btn btn-success" (click)="EditRecord()">
+            <i class="material-icons left">save</i>Editar
+          </button>
+          &nbsp;
+          <a
+            routerLink="/parameters/list-parties"
+            class="waves-effect waves-light btn red"
+            ><i class="material-icons left">cancel</i>Cancelar</a
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+  

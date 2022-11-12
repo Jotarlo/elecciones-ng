@@ -61,12 +61,12 @@ const routes: Routes = [
     canActivate: [AuthenticatedGuard]
   },
   {
-    path:'edit-party',
+    path:'edit-party/:id',
     component:EditPartyComponent,
     canActivate: [AuthenticatedGuard]
   },
   {
-    path:'remove-party',
+    path:'remove-party/:id',
     component:RemovePartyComponent,
     canActivate: [AuthenticatedGuard]
   },
