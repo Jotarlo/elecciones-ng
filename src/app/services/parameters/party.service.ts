@@ -29,15 +29,11 @@ export class PartyService {
    * @returns lista de partidos en estructura JSON
    */
   getRecordList(): Observable<PartyModel[]> {
-    return this.http.get<PartyModel[]>(this.url);
+    return this.http.get<PartyModel[]>(this.url + "?filter={}");
   }
 
   getRecordById(id:number): Observable<PartyModel> {
-    return this.http.get<PartyModel>(this.url+"/"+id, {
-      headers:new HttpHeaders({
-        "Authorization":"Bearer "+ this.jwt
-      })
-    });
+    return this.http.get<PartyModel>(this.url+"/"+id);
   }
 
 
@@ -50,10 +46,6 @@ export class PartyService {
     return this.http.post<PartyModel>(this.url, {
       nombre: record.nombre,
       logo: record.logo
-    }, {
-      headers: new HttpHeaders({
-        "Authorization": `Bearer ${this.jwt}`
-      })
     });
   }
 
@@ -63,11 +55,7 @@ export class PartyService {
    * @returns NA
    */
   editRecord(record: PartyModel) {
-    return this.http.put(this.url + "/" + record.id, record, {
-      headers: new HttpHeaders({
-        "Authorization": `Bearer ${this.jwt}`
-      })
-    });
+    return this.http.put(this.url + "/" + record.id, record);
   }
 
   /**
@@ -76,21 +64,13 @@ export class PartyService {
    * @returns NA
    */
   removeRecord(id: number) {
-    return this.http.delete(this.url + "/" + id, {
-      headers: new HttpHeaders({
-        "Authorization": `Bearer ${this.jwt}`
-      })
-    });
+    return this.http.delete(this.url + "/" + id);
   }
 
 
   uploadImage(formData: FormData): Observable<UploadedFileModel> {
     let actionName: string = "cargar-archivo-movimiento";
-    return this.http.post<UploadedFileModel>(`${this.baseUrl}/${actionName}`, formData, {
-      headers: new HttpHeaders({
-        "Authorization": `Bearer ${this.jwt}`
-      })
-    });
+    return this.http.post<UploadedFileModel>(`${this.baseUrl}/${actionName}`, formData);
   }
 
 }

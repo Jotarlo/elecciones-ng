@@ -4,6 +4,7 @@ import { PartyModel } from 'src/app/models/party.model';
 import { PartyService } from 'src/app/services/parameters/party.service';
 
 declare const OpenConfirmModal: any;
+declare const OpenAddModal: any;
 
 @Component({
   selector: 'app-list-party',
@@ -11,6 +12,7 @@ declare const OpenConfirmModal: any;
   styleUrls: ['./list-party.component.css']
 })
 export class ListPartyComponent implements OnInit {
+  page: number = 1;
   idToRemove: number = -1;
   urlServer = ApisInfo.LOGIC_MS_URL;
   recordList: PartyModel[] = [];
@@ -55,6 +57,10 @@ export class ListPartyComponent implements OnInit {
         alert("Error obteniendo la información")
       }
     })
+  }
+
+  OpenAddModalFn(){
+    OpenAddModal();
   }
 
 }

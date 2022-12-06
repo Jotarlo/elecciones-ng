@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/parameters/parameters.module').then(m => m.ParametersModule)
   },
   {
+    path: "reports",
+    loadChildren: ()=>import('./modules/report/report.module').then(x => x.ReportModule)
+  },
+  {
     path:"**",
     component: NotFoundComponent
   }

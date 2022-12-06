@@ -33,7 +33,7 @@ export class EditPartyComponent implements OnInit {
     this.fGroup = this.fb.group({
       id: ['', []],
       name: ['', [Validators.required]],
-      file: ['', [Validators.required]]
+      file: ['', []]
     });
   }
 
@@ -76,6 +76,7 @@ export class EditPartyComponent implements OnInit {
         this.fGroup.controls["id"].setValue(data.id);
         this.fGroup.controls["name"].setValue(data.nombre);
         this.uploadedImage = data.logo;
+        this.isFileSelected = true;
       },
       error: (err) => {
 alert("Error obteniendo el registro")

@@ -12,3 +12,13 @@ function OpenConfirmModal(message) {
   var instance = M.Modal.getInstance(elem);
   instance.open();
 }
+
+
+
+function OpenAddModal() {
+  var elems = document.querySelectorAll(".modal");
+  M.Modal.init(elems, {});
+  let elem = document.querySelector("#AddModal");
+  var instance = M.Modal.getInstance(elem);
+  instance.open();
+}

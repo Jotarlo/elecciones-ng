@@ -15,6 +15,7 @@ import { EditPartyComponent } from './party/edit-party/edit-party.component';
 import { ListPartyComponent } from './party/list-party/list-party.component';
 import { RemovePartyComponent } from './party/remove-party/remove-party.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ParametersRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 export class ParametersModule { }

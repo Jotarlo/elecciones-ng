@@ -17,6 +17,11 @@
       class="right hide-on-med-and-down"
       *ngIf="roleId == '631fce3db1c44017449ac402'"
     >
+    <li>
+      <a *ngIf="isLogged" routerLink="/reports/report1"
+        >Reporte 1</a
+      >
+    </li>
       <li>
         <a *ngIf="isLogged" routerLink="/parameters/list-election"
           >Elecciones</a
